@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="simple" namespace="/" extends="struts-default" strict-method-invocation="false">
+        <interceptors>
+            <interceptor name="hasLogin" class="simple.interceptor.hasLoginInterceptor"/>
+            <interceptor-stack name="hasLoginStack">
+                <interceptor-ref name="hasLogin"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+            <interceptor-stack name="tokenStack">
+                <interceptor-ref name="token"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+            <interceptor-stack name="cookieStack">
+                <interceptor-ref name="cookie">
+                    <param name="cookiesName">SimpleUsername</param>
+                    <param name="cookiesValue">*</param>
+                </interceptor-ref>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-action-ref name="index"/>
+
+        <global-results>
+            <result name="Index" type="redirect">index</result>
+        </global-results>
+
+        <action name="index" class="simple.action.indexAction">
+            <result name="success">/index.jsp</result>
+            <result name="error" type="redirect">userIndex</result>
+            <interceptor-ref name="cookieStack"/>
+        </action>
+
+        <action name="userIndex" class="simple.action.userIndexAction">
+            <result name="success">/view/simple/userIndex.jsp</result>
+            <result name="error" type="redirect">index</result>
+            <interceptor-ref name="cookieStack"/>
+        </action>
+
+        <action name="loginPage" class="simple.action.loginPageAction">
+            <result name="success">/view/simple/login.jsp</result>
+            <interceptor-ref name="hasLoginStack"/>
+        </action>
+
+        <action name="login" class="simple.action.loginAction">
+            <result name="success" type="redirect">userIndex</result>
+            <result name="error" type="chain">loginPage</result>
+            <result name="invalid.token" type="redirect">index</result>
+            <interceptor-ref name="tokenStack"/>
+        </action>
+
+        <action name="logout" class="simple.action.logoutAction">
+            <result name="success" type="redirect">index</result>
+        </action>
+
+        <action name="registerPage" class="simple.action.registerPageAction">
+            <result name="success">/view/simple/register.jsp</result>
+            <interceptor-ref name="hasLoginStack"/>
+        </action>
+
+        <action name="register" class="simple.action.registerAction">
+            <result name="success" type="redirect">userIndex</result>
+            <result name="invalid.token" type="redirect">index</result>
+            <interceptor-ref name="tokenStack"/>
+        </action>
+
+        <action name="um_*" class="simple.action.SimpleDbAction" method="{1}">
+        </action>
+
+        <action name="mainWindow" class="simple.action.mainWindowAction">
+            <result>/view/simple/mainWindow.jsp</result>
+        </action>
+
+        <action name="readNotice" class="simple.action.readNoticeAction">
+            <result>/view/simple/readNotice.jsp</result>
+        </action>
+    </package>
+</struts>

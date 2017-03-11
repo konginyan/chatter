@@ -1,0 +1,3 @@
+$(function () {
+    $("#mainWindow").load("mainWindow")
+})

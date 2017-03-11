@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="admin" namespace="/admin" extends="struts-default" strict-method-invocation="false">
+        <interceptors>
+            <interceptor name="global" class="admin.interceptor.GlobalInterceptor"/>
+            <interceptor name="logout" class="admin.interceptor.LogoutInterceptor"/>
+            <interceptor-stack name="globalStack">
+                <interceptor-ref name="global"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+            <interceptor-stack name="logoutStack">
+                <interceptor-ref name="logout"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="globalStack"/>
+
+        <default-action-ref name="loginPage"/>
+
+        <global-results>
+            <result name="Login" type="redirect">loginPage</result>
+            <result name="Exception">/exception.jsp</result>
+        </global-results>
+        
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="Exception"/>
+        </global-exception-mappings>
+
+        <action name="um_*" class="admin.action.AdminDbAction" method="{1}">
+        </action>
+
+        <action name="loginPage" class="admin.action.loginPageAction">
+            <interceptor-ref name="logoutStack"/>
+            <result name="success">/view/admin/login.jsp</result>
+        </action>
+
+        <action name="login" class="admin.action.loginAction">
+            <interceptor-ref name="defaultStack"/>
+            <result type="redirect">main</result>
+            <result name="error" type="chain">loginPage</result>
+        </action>
+
+        <action name="main" class="admin.action.mainAction">
+            <result name="success">/view/admin/main.jsp</result>
+        </action>
+
+        <action name="userManager" class="admin.action.userManagerAction">
+            <result name="success">/view/admin/userManager.jsp</result>
+        </action>
+
+        <action name="resourceManager" class="admin.action.resourceManagerAction">
+            <result name="success">/view/admin/resourceManager.jsp</result>
+        </action>
+
+        <action name="systemView" class="admin.action.SystemViewAction">
+            <result name="success">/view/admin/SystemView.jsp</result>
+        </action>
+
+        <action name="editPage" class="admin.action.editPageAction">
+            <result name="success">/view/admin/editPage.jsp</result>
+        </action>
+
+        <action name="*Table" class="admin.action.tableAction" method="{1}Table">
+            <result name="{1}">/view/admin/{1}Table.jsp</result>
+        </action>
+        
+        <action name="fm_*" class="admin.action.fileDbAction" method="{1}">
+            <result name="success" type="stream">
+                <!--要下载文件的类型-->
+                <param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+                <!--action文件输入流的方法 getTargetFile()-->
+                <param name="inputName">inputStream</param>
+                <!--文件下载的处理方式 包括内联(inline)和附件(attachment)两种方式 -->
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+                <!---下载缓冲区的大小-->
+                <param name="bufferSize">1024000</param>
+            </result>
+            <interceptor-ref name="defaultStack">
+                <!--单位为byte-->
+                <param name="fileUpload.maximumSize">1024000000</param>
+                <param name="fileUpload.allowedExtensions">txt,zip,7z,doc,docx,ppt,pptx</param>
+            </interceptor-ref>
+        </action>
+
+    </package>
+</struts>
