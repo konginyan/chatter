@@ -1,3 +1,7 @@
 #li1,#li2{
     cursor: hand;
 }
+
+a{
+    cursor: pointer;
+}

@@ -10,10 +10,6 @@
     <li>
         <a href="#filePage" data-toggle="tab">文件</a>
     </li>
-
-    <li>
-        <a href="#articlePage" data-toggle="tab">文章</a>
-    </li>
 </ul>
 <div class="tab-content">
     <div id="filePage" class="tab-pane fade">
@@ -66,15 +62,6 @@
             </div>
         </div>
         <div id="noticeTable"></div>
-    </div>
-    <div id="articlePage" class="tab-pane fade">
-        <div class="input-group col-md-6 fb" style="float: right;">
-            <input id="article-search-key" type="text" class="form-control" placeholder="请输入字段名"/>
-            <span class="input-group-btn">
-                    <button id="article-search-btn" class="btn btn-info btn-search">查找</button>
-                </span>
-        </div>
-        <div id="articleTable"></div>
     </div>
 </div>
 </html>

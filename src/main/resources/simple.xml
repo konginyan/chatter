@@ -79,5 +79,9 @@
         <action name="readNotice" class="simple.action.readNoticeAction">
             <result>/view/simple/readNotice.jsp</result>
         </action>
+
+        <action name="my*" class="simple.action.myPageAction" method="{1}">
+            <result name="{1}">/view/simple/my{1}.jsp</result>
+        </action>
     </package>
 </struts>
