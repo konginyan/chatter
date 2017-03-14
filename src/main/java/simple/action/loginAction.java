@@ -6,25 +6,32 @@ import Service.SimpleService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.SimpleUser;
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 
-@Component
+@Controller
 @Scope("prototype")
 public class loginAction extends ActionSupport{
     SimpleUser simpleUser;
     String autoLogin;
+    String responseUrl;
     @Autowired
     CookieService cookieService;
     @Autowired
     SimpleService simpleService;
     @Autowired
     SessionService sessionService;
+
+    public String getResponseUrl() {
+        return responseUrl;
+    }
+
+    public void setResponseUrl(String responseUrl) {
+        this.responseUrl = responseUrl;
+    }
 
     public void setCookieService(CookieService cookieService) {
         this.cookieService = cookieService;
@@ -57,7 +64,6 @@ public class loginAction extends ActionSupport{
     @Override
     public String execute() throws Exception {
         ActionContext actionContext = ActionContext.getContext();
-        ServletContext context = ServletActionContext.getServletContext();
         if(simpleService.checkSimpleUserLogin(simpleUser.getUsername(),simpleUser.getPassword())){
             if(simpleService.isForbidden(simpleUser.getUsername())){
                 actionContext.put("errorMessage","该帐号已经被封禁");

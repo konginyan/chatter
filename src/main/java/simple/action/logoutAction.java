@@ -2,13 +2,12 @@ package simple.action;
 
 import Service.CookieService;
 import Service.SessionService;
-import admin.action.SystemViewAction;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
-@Component
+@Controller
 @Scope("prototype")
 public class logoutAction extends ActionSupport{
     @Autowired

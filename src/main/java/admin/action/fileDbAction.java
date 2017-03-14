@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import java.util.Date;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
-@Component
+@Controller
 @Scope("prototype")
 public class fileDbAction {
     String fileId;
@@ -40,8 +40,8 @@ public class fileDbAction {
     private String fileContentType;// 文件的类型
     private String fileFileName;// 文件的名称
     private String description;// 文件描述
-    public static final String defaultSavePath = "/file";
 
+    //获得当前web应用所在目录下file文件夹的绝对路径
     public String getRealPath(String savePath) {
         ServletContext context = ServletActionContext.getServletContext();
         return context.getRealPath(savePath);
@@ -88,9 +88,7 @@ public class fileDbAction {
     }
 
     public String uploadFile() throws Exception{
-        ServletContext context = ServletActionContext.getServletContext();
-        //获得当前web应用所在目录下file文件夹的绝对路径
-        String path = getRealPath(defaultSavePath);
+        String path = getRealPath(FileResource.defaultSavePath);
         File destFile = new File(path, fileFileName);
         if (!destFile.exists()) {
             destFile.createNewFile();
@@ -105,11 +103,10 @@ public class fileDbAction {
     }
 
     public String deleteFile() throws Exception{
-        //获得当前web应用所在目录下file文件夹的绝对路径
         HttpServletRequest request = ServletActionContext.getRequest();
         Long id = Long.parseLong(request.getParameter("id"));
         FileResource fileResource = fileService.queryFileById(id);
-        String path = getRealPath(defaultSavePath);
+        String path = getRealPath(FileResource.defaultSavePath);
         File destFile = new File(path+'/'+fileResource.getFileName());
         if (destFile.exists()){
             destFile.delete();

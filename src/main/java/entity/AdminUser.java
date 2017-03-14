@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class AdminUser implements User,Serializable{
+public class AdminUser implements Serializable{
     public final static String NAME_IN_SESSION = "username";
 
     @Id

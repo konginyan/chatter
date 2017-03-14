@@ -32,6 +32,8 @@
                 <value>entity.SimpleUser</value>
                 <value>entity.NoticeResource</value>
                 <value>entity.FileResource</value>
+                <value>entity.Article</value>
+                <value>entity.Comment</value>
             </list>
         </property>
     </bean>

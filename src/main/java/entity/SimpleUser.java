@@ -8,8 +8,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class SimpleUser implements User,Serializable{
+public class SimpleUser implements Serializable{
     public static final String NAME_IN_SESSION = "account";
+    public static final String NAME_IN_PAGE = "pageMaster";
     public static final int NORMAL = 0;
     public static final int FORBID = 1;
 

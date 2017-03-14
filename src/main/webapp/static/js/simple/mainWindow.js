@@ -1,8 +1,23 @@
-var readNotice = (id)=>{
-    $("#mainWindow").load("readNotice",{
-        'id':id
+$(function () {
+    $("#allNotice").click(()=>{
+        $("#mainWindow").load("li_noticeList",{
+            key:"",
+            page:'0'
+        })
     })
-}
+    $("#allFile").click(()=>{
+        $("#mainWindow").load("li_fileList",{
+            'key':"",
+            'page':'0'
+        })
+    })
+    $("#allArticle").click(()=>{
+        $("#mainWindow").load("li_articleList",{
+            'key':"",
+            'page':'0'
+        })
+    })
+})
 
 var downloadFile = (id)=>{
     $("#fileId").val(id)

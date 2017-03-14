@@ -4,7 +4,7 @@
     <div class="form-group">
         <label class="col-sm-1 control-label">用户名</label>
         <div class="col-sm-10">
-            <p class="form-control-static">me</p>
+            <p class="form-control-static">${pageMaster}</p>
         </div>
     </div>
     <div class="form-group">

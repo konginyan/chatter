@@ -12,8 +12,8 @@ public class test{
     }
 
     static public void main(String args[]){
-        String a = "a ? b ? c";
-        String[] b = {"fff","ddd"};
+        String a = "a?b?c";
+        String[] b = {"","ddd"};
         for (String c:b){
             a = a.replaceFirst("\\?",c);
         }

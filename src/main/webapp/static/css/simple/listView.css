@@ -1,0 +1,28 @@
+hr{
+    width: 100%;
+    margin: 3px;
+}
+
+a{
+    font-size: 16px;
+}
+
+.db{
+    margin-left: 20px;
+    margin-right: 100px;
+}
+
+h3{
+    margin-bottom: 20px;
+}
+
+label{
+    float: right;
+}
+
+.description{
+    font-family: "Adobe Devanagari";
+    margin-right: 100px;
+    color: gray;
+    font-size: 16px;
+}

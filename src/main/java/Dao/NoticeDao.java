@@ -26,8 +26,7 @@ public class NoticeDao {
     }
 
     public void deleteNotice(Long id){
-        NoticeResource noticeResource = new NoticeResource();
-        noticeResource.setId(id);
+        NoticeResource noticeResource = hibernateTemplate.get(NoticeResource.class,id);
         hibernateTemplate.delete(noticeResource);
     }
 

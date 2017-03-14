@@ -45,6 +45,7 @@
             <button type="submit" class="btn btn-default">注册</button>
         </div>
     </div>
+    <input type="text" name="responseUrl" value="${requestUrl}" hidden>
 </form>
 </body>
 </html>

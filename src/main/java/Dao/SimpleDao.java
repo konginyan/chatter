@@ -1,10 +1,7 @@
 package Dao;
 
 import Util.HibernateTemplateExtend;
-import entity.AdminUser;
 import entity.SimpleUser;
-import entity.User;
-import org.hibernate.Query;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +17,8 @@ public class SimpleDao {
         this.hibernateTemplate = hibernateTemplate;
     }
 
-    public void createSimple(User user){
-        hibernateTemplate.save((SimpleUser)user);
+    public void createSimple(SimpleUser simpleUser){
+        hibernateTemplate.save(simpleUser);
     }
 
     public List<SimpleUser> queryAllSimple(){

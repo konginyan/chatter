@@ -26,8 +26,7 @@ public class FileDao {
     }
 
     public void deleteFile(Long id){
-        FileResource fileResource = new FileResource();
-        fileResource.setId(id);
+        FileResource fileResource = hibernateTemplate.get(FileResource.class,id);
         hibernateTemplate.delete(fileResource);
     }
 

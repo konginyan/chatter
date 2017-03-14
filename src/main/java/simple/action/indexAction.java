@@ -4,9 +4,9 @@ import Service.SessionService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
-@Component
+@Controller
 @Scope("prototype")
 public class indexAction extends ActionSupport{
     String SimpleUsername;
@@ -28,11 +28,8 @@ public class indexAction extends ActionSupport{
     @Override
     public String execute() throws Exception {
         if(SimpleUsername != null){
-            return ERROR;
+            sessionService.setSession("account",SimpleUsername);
         }
-        else {
-            if(sessionService.getSessionValue("account")!=null) return ERROR;
-            return SUCCESS;
-        }
+        return SUCCESS;
     }
 }

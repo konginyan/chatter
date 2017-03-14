@@ -8,7 +8,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class FileResource implements Resource,Serializable{
+public class FileResource implements Serializable{
+    public static final String defaultSavePath = "/file";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

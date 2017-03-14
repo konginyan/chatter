@@ -13,13 +13,12 @@ import entity.SimpleUser;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@Component
+@Controller
 @Scope("prototype")
 public class tableAction extends ActionSupport{
     @Autowired

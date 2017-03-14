@@ -1,15 +1,13 @@
 package entity;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.type.StringClobType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Clob;
 import java.util.Date;
 
 @Entity
-public class NoticeResource implements Resource,Serializable{
+public class NoticeResource implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

@@ -32,13 +32,6 @@
 
         <action name="index" class="simple.action.indexAction">
             <result name="success">/index.jsp</result>
-            <result name="error" type="redirect">userIndex</result>
-            <interceptor-ref name="cookieStack"/>
-        </action>
-
-        <action name="userIndex" class="simple.action.userIndexAction">
-            <result name="success">/view/simple/userIndex.jsp</result>
-            <result name="error" type="redirect">index</result>
             <interceptor-ref name="cookieStack"/>
         </action>
 
@@ -48,7 +41,7 @@
         </action>
 
         <action name="login" class="simple.action.loginAction">
-            <result name="success" type="redirect">userIndex</result>
+            <result name="success" type="redirect">${responseUrl}</result>
             <result name="error" type="chain">loginPage</result>
             <result name="invalid.token" type="redirect">index</result>
             <interceptor-ref name="tokenStack"/>
@@ -64,7 +57,7 @@
         </action>
 
         <action name="register" class="simple.action.registerAction">
-            <result name="success" type="redirect">userIndex</result>
+            <result name="success" type="redirect">${responseUrl}</result>
             <result name="invalid.token" type="redirect">index</result>
             <interceptor-ref name="tokenStack"/>
         </action>
@@ -76,12 +69,34 @@
             <result>/view/simple/mainWindow.jsp</result>
         </action>
 
-        <action name="readNotice" class="simple.action.readNoticeAction">
-            <result>/view/simple/readNotice.jsp</result>
+        <action name="read*" class="simple.action.ReadAction" method="{1}">
+            <result name="{1}">/view/simple/read{1}.jsp</result>
         </action>
 
         <action name="my*" class="simple.action.myPageAction" method="{1}">
             <result name="{1}">/view/simple/my{1}.jsp</result>
+        </action>
+
+        <action name="ae_*" class="simple.action.articleOpAction" method="{1}">
+            <result name="success" type="stream">
+                <!--要下载文件的类型-->
+                <param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+                <!--action文件输入流的方法 getTargetFile()-->
+                <param name="inputName">inputStream</param>
+                <!--文件下载的处理方式 包括内联(inline)和附件(attachment)两种方式 -->
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+                <!---下载缓冲区的大小-->
+                <param name="bufferSize">1024000</param>
+            </result>
+            <interceptor-ref name="defaultStack">
+                <!--单位为byte-->
+                <param name="fileUpload.maximumSize">1024000000</param>
+                <param name="fileUpload.allowedExtensions">zip,7z</param>
+            </interceptor-ref>
+        </action>
+
+        <action name="li_*" class="simple.action.listViewAction" method="{1}">
+            <result name="success">/view/simple/listView.jsp</result>
         </action>
     </package>
 </struts>

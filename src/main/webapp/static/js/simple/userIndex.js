@@ -1,5 +1,7 @@
 $(function () {
-    $("#li1").click(()=>{
-        $("#mainWindow").load("myPage")
+    $("#li3").click(()=>{
+        $("#mainWindow").load("myPage",{
+            'pageMaster':$("#account").text()
+        })
     })
 })

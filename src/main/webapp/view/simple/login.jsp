@@ -57,6 +57,7 @@
             <button type="submit" class="btn btn-default">登录</button>
         </div>
     </div>
+    <input type="text" name="responseUrl" value="${requestUrl}" hidden>
 </form>
 </body>
 </html>

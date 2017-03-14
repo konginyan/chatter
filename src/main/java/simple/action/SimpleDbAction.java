@@ -5,13 +5,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 
 import static Service.ajaxResponse.ajaxResponseText;
 
-@Component
+@Controller
 @Scope("prototype")
 public class SimpleDbAction extends ActionSupport{
     @Autowired

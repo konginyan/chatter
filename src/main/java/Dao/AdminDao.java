@@ -2,7 +2,6 @@ package Dao;
 
 import Util.HibernateTemplateExtend;
 import entity.AdminUser;
-import entity.User;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,14 +21,13 @@ public class AdminDao {
 
     }
 
-    public void createAdmin(User user){
-        hibernateTemplate.save((AdminUser)user);
+    public void createAdmin(AdminUser adminUser){
+        hibernateTemplate.save(adminUser);
     }
 
     public void deleteAdmin(Long id){
-        AdminUser user = new AdminUser();
-        user.setId(id);
-        hibernateTemplate.delete(user);
+        AdminUser adminUser = hibernateTemplate.get(AdminUser.class,id);
+        hibernateTemplate.delete(adminUser);
     }
 
     public List<AdminUser> queryAllAdmin(){
