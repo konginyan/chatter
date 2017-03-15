@@ -49,7 +49,7 @@ public class Comment implements Serializable {
     }
 
     public String getContent() {
-        return content;
+        return content.replaceAll(" ","&nbsp;").replaceAll("\n","<br/>").replaceAll("\r","<br/>");
     }
 
     public void setContent(String content) {

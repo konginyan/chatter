@@ -51,7 +51,7 @@ public class tableAction extends ActionSupport{
         HttpServletRequest request = ServletActionContext.getRequest();
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
-        List<AdminUser> objectList = adminService.queryAdminByPageAndText(page+1,key);
+        List<AdminUser> objectList = adminService.queryAdminByPageAndText(page+1,10,key);
         //得到总页数
         List<AdminUser> totalList = adminService.queryAdminByText(key);
         actionContext.put("adminTotalRecord",totalList.size());
@@ -66,7 +66,7 @@ public class tableAction extends ActionSupport{
         HttpServletRequest request = ServletActionContext.getRequest();
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
-        List<SimpleUser> objectList = simpleService.querySimpleByPageAndText(page+1,key);
+        List<SimpleUser> objectList = simpleService.querySimpleByPageAndText(page+1,10,key);
         //得到总页数
         List<SimpleUser> totalList = simpleService.querySimpleByText(key);
         actionContext.put("simpleTotalRecord",totalList.size());
@@ -80,7 +80,7 @@ public class tableAction extends ActionSupport{
         HttpServletRequest request = ServletActionContext.getRequest();
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
-        List<NoticeResource> objectList = noticeService.queryNoticeByPageContainTitle(page+1,key);
+        List<NoticeResource> objectList = noticeService.queryNoticeByPageContainTitle(page+1,10,key);
         //得到总页数
         List<NoticeResource> totalList = noticeService.queryNoticeContainTitle(key);
         actionContext.put("noticeTotalRecord",totalList.size());
@@ -94,7 +94,7 @@ public class tableAction extends ActionSupport{
         HttpServletRequest request = ServletActionContext.getRequest();
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
-        List<FileResource> objectList = fileService.queryFileByPageContainName(page+1,key);
+        List<FileResource> objectList = fileService.queryFileByPageContainName(page+1,10,key);
         //得到总页数
         List<FileResource> totalList = fileService.queryFileContainName(key);
         actionContext.put("fileTotalRecord",totalList.size());

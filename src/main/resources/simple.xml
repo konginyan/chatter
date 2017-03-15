@@ -28,7 +28,12 @@
 
         <global-results>
             <result name="Index" type="redirect">index</result>
+            <result name="Exception">/exception.jsp</result>
         </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="Exception"/>
+        </global-exception-mappings>
 
         <action name="index" class="simple.action.indexAction">
             <result name="success">/index.jsp</result>
@@ -97,6 +102,9 @@
 
         <action name="li_*" class="simple.action.listViewAction" method="{1}">
             <result name="success">/view/simple/listView.jsp</result>
+        </action>
+
+        <action name="co_*" class="simple.action.CommentAction" method="{1}Comment">
         </action>
     </package>
 </struts>

@@ -30,16 +30,16 @@ public class ArticleService {
         return articleDao.queryArticleByText(key);
     }
 
-    public List<Article> queryArticleByPageAndText(int page, String key){
-        return articleDao.queryArticleByPageAndText(page, key);
+    public List<Article> queryArticleByPageAndText(int page, int perPage, String key){
+        return articleDao.queryArticleByPageAndText(page, perPage, key);
     }
 
     public List<Article> queryArticleByTextAndAuthor(String key, String name){
         return articleDao.queryArticleByTextAndAuthor(key,name);
     }
 
-    public List<Article> queryArticleByPageAndTextAndAuthor(int page, String key, String name){
-        return articleDao.queryArticleByPageAndTextAndAuthor(page, key, name);
+    public List<Article> queryArticleByPageAndTextAndAuthor(int page, int perPage, String key, String name){
+        return articleDao.queryArticleByPageAndTextAndAuthor(page, perPage, key, name);
     }
 
     public List<Article> getRecentArticles(int number){

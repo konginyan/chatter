@@ -17,6 +17,12 @@ $(function () {
             'page':'0'
         })
     })
+    $("#index-search-button").click(()=>{
+        $("#mainWindow").load("li_noticeList",{
+            key:$("#index-search-key").val(),
+            page:'0'
+        })
+    })
 })
 
 var downloadFile = (id)=>{

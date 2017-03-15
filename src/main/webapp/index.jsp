@@ -31,9 +31,9 @@
         </s:else>
         <form class="navbar-form navbar-right">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input id="index-search-key" type="text" class="form-control" placeholder="Search">
             </div>
-            <button type="submit" class="btn btn-default">搜索</button>
+            <button id="index-search-button" type="button" class="btn btn-default">搜索</button>
         </form>
     </div>
 </nav>

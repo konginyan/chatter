@@ -30,26 +30,15 @@ public class AdminDao {
         hibernateTemplate.delete(adminUser);
     }
 
-    public List<AdminUser> queryAllAdmin(){
-        String hql = " from AdminUser ";
-        return (List<AdminUser>)hibernateTemplate.find(hql);
-    }
-
     public List<AdminUser> queryAdminByText(String key){
         String hql = " from AdminUser a where a.username like ?";
         return  (List<AdminUser>)hibernateTemplate.find(hql,"%"+key+"%");
     }
 
-    public List<AdminUser> queryAdminByPage(int page){
-        String hql = " from AdminUser ";
-        return (List<AdminUser>)HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10);
-    }
-
-    public List<AdminUser> queryAdminByPageAndText(int page, String key){
+    public List<AdminUser> queryAdminByPageAndText(int page, int perPage, String key){
         String hql = " from AdminUser a where a.username like ? order by a.id asc";
         return (List<AdminUser>)HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10,key);
+                .findByPage(hibernateTemplate,hql,(page-1)*perPage,perPage,key);
     }
 
     public AdminUser queryAdminByName(String name){

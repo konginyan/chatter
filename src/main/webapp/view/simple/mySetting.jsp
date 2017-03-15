@@ -15,10 +15,6 @@
     <input id="openArticle" name="check" type="checkbox" checked />
 </div>
 <div class="fb">
-    <label for="openComment" class="db">公开评论</label>
-    <input id="openComment" name="check" type="checkbox" checked />
-</div>
-<div class="fb">
     <label for="openCollection" class="db">公开收藏</label>
     <input id="openCollection" name="check" type="checkbox" checked />
 </div>

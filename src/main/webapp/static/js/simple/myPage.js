@@ -2,7 +2,6 @@ $(function () {
     $("#myPersonal").load("myPersonal");
     $("#myCollection").load("myCollection");
     $("#myFollow").load("myFollow");
-    $("#myComment").load("myComment");
     $("#mySetting").load("mySetting")
 
     $("#post").click(()=>{

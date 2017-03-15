@@ -5,10 +5,13 @@ import Service.NoticeService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.Article;
+import entity.Comment;
 import entity.NoticeResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 @Controller
 @Scope("prototype")
@@ -48,8 +51,10 @@ public class ReadAction extends ActionSupport{
     public String Article() throws Exception {
         Article article = articleService.queryArticleById(Long.parseLong(id));
         articleService.addClickCount(Long.parseLong(id));
+        List<Comment> comments = article.getComments();
         ActionContext actionContext = ActionContext.getContext();
         actionContext.put("article",article);
+        actionContext.put("comments",comments);
         return "Article";
     }
 }

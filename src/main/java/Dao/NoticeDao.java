@@ -30,31 +30,15 @@ public class NoticeDao {
         hibernateTemplate.delete(noticeResource);
     }
 
-    public List<NoticeResource> queryAllNotice(){
-        String hql = " from NoticeResource ";
-        return (List<NoticeResource>)hibernateTemplate.find(hql);
-    }
-
     public List<NoticeResource> queryNoticeContainTitle(String key){
         String hql = " from NoticeResource a where a.title like ?";
         return  (List<NoticeResource>)hibernateTemplate.find(hql,"%"+key+"%");
     }
 
-    public List<NoticeResource> queryNoticeByPage(int page){
-        String hql = " from NoticeResource ";
+    public List<NoticeResource> queryNoticeByPageContainTitle(int page, int perPage, String key){
+        String hql = " from NoticeResource a where a.title like ? order by a.createTime desc";
         return (List<NoticeResource>) HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10);
-    }
-
-    public List<NoticeResource> queryNoticeByPageContainTitle(int page, String key){
-        String hql = " from NoticeResource a where a.title like ? order by a.id asc";
-        return (List<NoticeResource>) HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10,key);
-    }
-
-    public List<NoticeResource> queryNoticeByAuthor(String name){
-        String hql = " from NoticeResource a where a.author like ?";
-        return (List<NoticeResource>)hibernateTemplate.find(hql,name);
+                .findByPage(hibernateTemplate,hql,(page-1)*perPage,perPage,key);
     }
 
     public NoticeResource queryNoticeById(Long id){

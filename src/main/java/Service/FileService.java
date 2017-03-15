@@ -22,8 +22,8 @@ public class FileService {
         fileDao.uploadFile(fileResource);
     }
 
-    public List<FileResource> queryFileByPageContainName(int page, String key){
-        return fileDao.queryFileByPageContainName(page, key);
+    public List<FileResource> queryFileByPageContainName(int page, int perPage, String key){
+        return fileDao.queryFileByPageContainName(page,perPage,key);
     }
 
     public List<FileResource> queryFileContainName(String key){

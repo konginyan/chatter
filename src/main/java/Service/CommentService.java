@@ -26,12 +26,4 @@ public class CommentService {
     public void deleteComment(Long id){
         commentDao.deleteComment(id);
     }
-
-    public List<Comment> queryCommentByArticle(Article article){
-        return commentDao.queryCommentByArticle(article);
-    }
-
-    public List<Comment> queryCommentByAuthor(String name){
-        return commentDao.queryCommentByAuthor(name);
-    }
 }

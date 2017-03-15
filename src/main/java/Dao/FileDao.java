@@ -40,10 +40,10 @@ public class FileDao {
         return  (List<FileResource>)hibernateTemplate.find(hql,key);
     }
 
-    public List<FileResource> queryFileByPageContainName(int page, String key){
-        String hql = " from FileResource a where a.fileName like ? order by a.id asc";
+    public List<FileResource> queryFileByPageContainName(int page, int perPage, String key){
+        String hql = " from FileResource a where a.fileName like ? order by a.uploadTime desc";
         return (List<FileResource>) HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10,key);
+                .findByPage(hibernateTemplate,hql,(page-1)*perPage,perPage,key);
     }
 
     public FileResource queryFileById(Long id){

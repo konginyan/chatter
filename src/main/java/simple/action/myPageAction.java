@@ -1,10 +1,12 @@
 package simple.action;
 
 import Service.ArticleService;
+import Service.CommentService;
 import Service.SessionService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.Article;
+import entity.Comment;
 import entity.SimpleUser;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,12 @@ public class myPageAction extends ActionSupport{
     ArticleService articleService;
     @Autowired
     SessionService sessionService;
+    @Autowired
+    CommentService commentService;
+
+    public void setCommentService(CommentService commentService) {
+        this.commentService = commentService;
+    }
 
     public void setSessionService(SessionService sessionService) {
         this.sessionService = sessionService;
@@ -55,17 +63,13 @@ public class myPageAction extends ActionSupport{
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
         String author = sessionService.getSessionValue(SimpleUser.NAME_IN_PAGE).toString();
-        List<Article> objectList = articleService.queryArticleByPageAndTextAndAuthor(page+1,key,author);
+        List<Article> objectList = articleService.queryArticleByPageAndTextAndAuthor(page+1,5,key,author);
         //得到总页数
         List<Article> totalList = articleService.queryArticleByTextAndAuthor(key,author);
         actionContext.put("articleTotalRecord",totalList.size());
         actionContext.put("articleList",objectList);
         actionContext.put("articleCurrentPage",page);
         return "Article";
-    }
-
-    public String Comment(){
-        return "Comment";
     }
 
     public String Setting(){

@@ -35,10 +35,10 @@ public class ArticleDao {
         return  (List<Article>)hibernateTemplate.find(hql,"%"+key+"%");
     }
 
-    public List<Article> queryArticleByPageAndText(int page, String key){
+    public List<Article> queryArticleByPageAndText(int page, int perPage, String key){
         String hql = " from Article a where a.title like ? order by a.id asc";
         return (List<Article>)HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10,key);
+                .findByPage(hibernateTemplate,hql,(page-1)*perPage,perPage,key);
     }
 
     public List<Article> queryArticleByTextAndAuthor(String key, String name){
@@ -46,10 +46,10 @@ public class ArticleDao {
         return (List<Article>)hibernateTemplate.find(hql,"%"+key+"%",name);
     }
 
-    public List<Article> queryArticleByPageAndTextAndAuthor(int page, String key, String name){
+    public List<Article> queryArticleByPageAndTextAndAuthor(int page, int perPage, String key, String name){
         String hql = " from Article a where a.title like ? and author like ? order by a.id asc";
         return (List<Article>)HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10,key,name);
+                .findByPage(hibernateTemplate,hql,(page-1)*perPage,perPage,key,name);
     }
 
     public List<Article> queryRecentArticles(int number){

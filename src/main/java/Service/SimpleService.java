@@ -36,20 +36,12 @@ public class SimpleService {
         else return true;
     }
 
-    public List<SimpleUser> queryAllSimple(){
-        return simpleDao.queryAllSimple();
-    }
-
     public List<SimpleUser> querySimpleByText(String key){
         return simpleDao.querySimpleByText(key);
     }
 
-    public List<SimpleUser> querySimpleByPage(int page){
-        return simpleDao.querySimpleByPage(page);
-    }
-
-    public List<SimpleUser> querySimpleByPageAndText(int page, String key){
-        return simpleDao.querySimpleByPageAndText(page, key);
+    public List<SimpleUser> querySimpleByPageAndText(int page, int perPage, String key){
+        return simpleDao.querySimpleByPageAndText(page, perPage, key);
     }
 
     public SimpleUser querySimpleByName(String name){

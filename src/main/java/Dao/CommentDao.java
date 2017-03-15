@@ -25,14 +25,4 @@ public class CommentDao {
         Comment comment = hibernateTemplate.get(Comment.class,id);
         hibernateTemplate.delete(comment);
     }
-
-    public List<Comment> queryCommentByArticle(Article article){
-        String hql = " from Comment a where a.article.id = ? order by createTime asc";
-        return  (List<Comment>)hibernateTemplate.find(hql,article.getId());
-    }
-
-    public List<Comment> queryCommentByAuthor(String name){
-        String hql = " from Comment a where a.author like ? order by createTime desc ";
-        return  (List<Comment>)hibernateTemplate.find(hql,name);
-    }
 }

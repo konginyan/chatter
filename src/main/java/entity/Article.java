@@ -25,7 +25,7 @@ public class Article implements Serializable {
     @Embedded
     private Attachment attachment;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article",fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     public Article(){

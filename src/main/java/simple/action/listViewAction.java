@@ -43,13 +43,14 @@ public class listViewAction extends ActionSupport{
         HttpServletRequest request = ServletActionContext.getRequest();
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
-        List<NoticeResource> objectList = noticeService.queryNoticeByPageContainTitle(page+1,key);
+        List<NoticeResource> objectList = noticeService.queryNoticeByPageContainTitle(page+1,20,key);
         //得到总页数
         List<NoticeResource> totalList = noticeService.queryNoticeContainTitle(key);
         actionContext.put("TotalRecord",totalList.size());
         actionContext.put("List",objectList);
         actionContext.put("CurrentPage",page);
         actionContext.put("type","notice");
+        actionContext.put("key",key);
         return SUCCESS;
     }
 
@@ -58,13 +59,14 @@ public class listViewAction extends ActionSupport{
         HttpServletRequest request = ServletActionContext.getRequest();
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
-        List<FileResource> objectList = fileService.queryFileByPageContainName(page+1,key);
+        List<FileResource> objectList = fileService.queryFileByPageContainName(page+1,20,key);
         //得到总页数
         List<FileResource> totalList = fileService.queryFileContainName(key);
         actionContext.put("TotalRecord",totalList.size());
         actionContext.put("List",objectList);
         actionContext.put("CurrentPage",page);
         actionContext.put("type","file");
+        actionContext.put("key",key);
         return SUCCESS;
     }
 
@@ -73,13 +75,14 @@ public class listViewAction extends ActionSupport{
         HttpServletRequest request = ServletActionContext.getRequest();
         String key = request.getParameter("key");
         int page = Integer.parseInt(request.getParameter("page"));
-        List<Article> objectList = articleService.queryArticleByPageAndText(page+1,key);
+        List<Article> objectList = articleService.queryArticleByPageAndText(page+1,20,key);
         //得到总页数
         List<Article> totalList = articleService.queryArticleByText(key);
         actionContext.put("TotalRecord",totalList.size());
         actionContext.put("List",objectList);
         actionContext.put("CurrentPage",page);
         actionContext.put("type","article");
+        actionContext.put("key",key);
         return SUCCESS;
     }
 }

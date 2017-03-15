@@ -21,26 +21,15 @@ public class SimpleDao {
         hibernateTemplate.save(simpleUser);
     }
 
-    public List<SimpleUser> queryAllSimple(){
-        String hql = " from SimpleUser ";
-        return (List<SimpleUser>)hibernateTemplate.find(hql);
-    }
-
     public List<SimpleUser> querySimpleByText(String key){
         String hql = " from SimpleUser a where a.username like ?";
         return  (List<SimpleUser>)hibernateTemplate.find(hql,"%"+key+"%");
     }
 
-    public List<SimpleUser> querySimpleByPage(int page){
-        String hql = " from SimpleUser ";
-        return (List<SimpleUser>) HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10);
-    }
-
-    public List<SimpleUser> querySimpleByPageAndText(int page, String key){
+    public List<SimpleUser> querySimpleByPageAndText(int page, int perPage, String key){
         String hql = " from SimpleUser a where a.username like ? order by a.id asc";
         return (List<SimpleUser>)HibernateTemplateExtend
-                .findByPage(hibernateTemplate,hql,(page-1)*10,10,key);
+                .findByPage(hibernateTemplate,hql,(page-1)*perPage,perPage,key);
     }
 
     public SimpleUser querySimpleByName(String name){

@@ -32,20 +32,12 @@ public class AdminService {
         else return true;
     }
 
-    public List<AdminUser> queryAllAdmin(){
-        return adminDao.queryAllAdmin();
-    }
-
     public List<AdminUser> queryAdminByText(String key){
         return adminDao.queryAdminByText(key);
     }
 
-    public List<AdminUser> queryAdminByPage(int page){
-        return adminDao.queryAdminByPage(page);
-    }
-
-    public List<AdminUser> queryAdminByPageAndText(int page, String key){
-        return adminDao.queryAdminByPageAndText(page,key);
+    public List<AdminUser> queryAdminByPageAndText(int page, int perPage, String key){
+        return adminDao.queryAdminByPageAndText(page,perPage,key);
     }
 
     public AdminUser queryAdminByName(String name){

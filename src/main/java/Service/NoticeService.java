@@ -30,10 +30,6 @@ public class NoticeService {
         return noticeDao.queryRecentNotices(number);
     }
 
-    public List<NoticeResource> getAllNotice(){
-        return noticeDao.queryAllNotice();
-    }
-
     public NoticeResource getNoticeById(Long id){
         return noticeDao.queryNoticeById(id);
     }
@@ -42,16 +38,8 @@ public class NoticeService {
         return noticeDao.queryNoticeContainTitle(key);
     }
 
-    public List<NoticeResource> queryNoticeByPage(int page){
-        return noticeDao.queryNoticeByPage(page);
-    }
-
-    public List<NoticeResource> queryNoticeByPageContainTitle(int page, String key){
-        return noticeDao.queryNoticeByPageContainTitle(page, key);
-    }
-
-    public List<NoticeResource> queryNoticeByAuthor(String name){
-        return noticeDao.queryNoticeByAuthor(name);
+    public List<NoticeResource> queryNoticeByPageContainTitle(int page, int perPage, String key){
+        return noticeDao.queryNoticeByPageContainTitle(page, perPage, key);
     }
 
     public void addClickCount(Long id){
