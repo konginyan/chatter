@@ -48,8 +48,8 @@ public class registerAction extends ActionSupport{
 
     @Override
     public String execute() throws Exception {
-        simpleUser.setCreateDate(new Date());
-        simpleService.createSimpleUser(simpleUser);
+        SimpleUser newUser = new SimpleUser(simpleUser.getUsername(),simpleUser.getPassword(),new Date());
+        simpleService.createSimpleUser(newUser);
         sessionService.setSession("account",simpleUser.getUsername());
         return SUCCESS;
     }

@@ -17,7 +17,7 @@
             无
         </s:else>
         <label style="float: right">
-            被收藏人数:<s:property value="collectCount"/>
+            点击量:<s:property value="clickCount"/>
             <a onclick="deleteConfirm('<s:property value="id"/>','<s:property value="title"/>')">删除</a>
         </label>
     </div>

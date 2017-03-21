@@ -31,9 +31,9 @@
             <result name="Exception">/exception.jsp</result>
         </global-results>
 
-        <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="Exception"/>
-        </global-exception-mappings>
+        <!--<global-exception-mappings>-->
+            <!--<exception-mapping exception="java.lang.Exception" result="Exception"/>-->
+        <!--</global-exception-mappings>-->
 
         <action name="index" class="simple.action.indexAction">
             <result name="success">/index.jsp</result>

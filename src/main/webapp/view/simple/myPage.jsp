@@ -26,25 +26,9 @@
             <div id="myPersonal"></div>
         </div>
         <div id="follow" class="tab-pane fade">
-            <div class="fb">
-                <div class="input-group col-md-6" style="float: right;">
-                    <input id="follow-search-key" type="text" class="form-control" placeholder="请输入字段名"/>
-                    <span class="input-group-btn">
-                        <button id="follow-search-btn" class="btn btn-info btn-search">查找</button>
-                    </span>
-                </div>
-            </div>
             <div id="myFollow"></div>
         </div>
         <div id="collection" class="tab-pane fade">
-            <div class="fb">
-                <div class="input-group col-md-6" style="float: right;">
-                    <input id="collection-search-key" type="text" class="form-control" placeholder="请输入字段名"/>
-                    <span class="input-group-btn">
-                        <button id="collection-search-btn" class="btn btn-info btn-search">查找</button>
-                    </span>
-                </div>
-            </div>
             <div id="myCollection"></div>
         </div>
         <div id="article" class="tab-pane fade">

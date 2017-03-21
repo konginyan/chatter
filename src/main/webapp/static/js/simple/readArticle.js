@@ -1,36 +1,49 @@
 $(function () {
-    $("#makeComment").click(()=>{
+    $("#makeComment").click(() => {
         $.ajax({
-            url:'co_make',
-            type:'POST',
-            data:{
-                'articleId':$("#articleId").val(),
-                'content':$("#inputComment").val()
+            url: 'co_make',
+            type: 'POST',
+            data: {
+                'articleId': $("#articleId").val(),
+                'content': $("#inputComment").val()
             },
-            success:(data,textStatus)=>{
+            success: (data, textStatus) => {
                 alert(data);
                 location.reload()
             }
         })
     })
-});
-
-var downloadFile = ()=>{
-    $('#downloadForm').submit()
-};
-
-var deleteComment = (id)=>{
-    if(confirm('你要删除此评论吗？')){
+    $(".collect").click(() => {
         $.ajax({
-            url:'co_delete',
-            type:'POST',
-            data:{
-                'id':id
+            url: 'um_collectArticle',
+            type: 'POST',
+            data: {
+                'articleId': $("#articleId").val()
             },
-            success:(data,textStatus)=>{
+            success: (data, textStatus) => {
                 alert(data);
                 location.reload()
             }
         })
+    });
+
+    var downloadFile = () => {
+        $('#downloadForm').submit()
+    };
+
+    var deleteComment = (id) => {
+        if (confirm('你要删除此评论吗？')) {
+            $.ajax({
+                url: 'co_delete',
+                type: 'POST',
+                data: {
+                    'id': id
+                },
+                success: (data, textStatus) => {
+                    alert(data);
+                    location.reload()
+                }
+            })
+        }
     }
-}
+})

@@ -42,6 +42,14 @@
     <article>
         <section>
             <h1 class="text-center"><s:property value="#request.article.title"/></h1>
+            <s:if test="#session.account!=null">
+                <s:if test="#request.collected">
+                    <button style="float: right" class="btn btn-danger collect">已收藏</button>
+                </s:if>
+                <s:else>
+                    <button style="float: right" class="btn btn-success collect">收藏</button>
+                </s:else>
+            </s:if>
             <label style="color: gray" class="text-center">作者：<a href="#"><s:property value="#request.article.author"/></a>
                 &nbsp;&nbsp;&nbsp;&nbsp;<s:property value="#request.article.createTime"/></label>
             <hr/>

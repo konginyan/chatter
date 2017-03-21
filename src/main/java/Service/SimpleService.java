@@ -1,12 +1,14 @@
 package Service;
 
 import Dao.SimpleDao;
+import entity.Article;
 import entity.SimpleUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -54,5 +56,29 @@ public class SimpleService {
 
     public boolean isForbidden(String name){
         return simpleDao.isForbidden(name);
+    }
+
+    public void collectArticle(Long id, Article article){
+        simpleDao.collectArticle(id, article);
+    }
+
+    public Set<Article> queryCollection(Long id){
+        return simpleDao.queryCollection(id);
+    }
+
+    public void follow(Long id, SimpleUser follow){
+        simpleDao.follow(id, follow);
+    }
+
+    public Set<SimpleUser> queryFollows(Long id){
+        return simpleDao.queryFollows(id);
+    }
+
+    public void changeSetting(Long id, boolean personal, boolean article, boolean collection, boolean follow){
+        simpleDao.changeSetting(id, personal, article, collection, follow);
+    }
+
+    public boolean setContainArticle(Set<Article> set, Article article){
+        return simpleDao.setContainArticle(set, article);
     }
 }

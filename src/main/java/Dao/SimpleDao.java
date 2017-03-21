@@ -1,12 +1,16 @@
 package Dao;
 
 import Util.HibernateTemplateExtend;
+import entity.Article;
 import entity.SimpleUser;
+import entity.UserSetting;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class SimpleDao {
@@ -49,5 +53,59 @@ public class SimpleDao {
     public boolean isForbidden(String name){
         SimpleUser simpleUser = querySimpleByName(name);
         return simpleUser.getStatus()==SimpleUser.FORBID;
+    }
+
+    public void collectArticle(Long id, Article article){
+        SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
+        Set<Article> collections = simpleUser.getCollections();
+        if(setContainArticle(collections,article)){
+            removeArticleFromSet(collections,article);
+        }
+        else collections.add(article);
+    }
+
+    public Set<Article> queryCollection(Long id){
+        SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
+        return simpleUser.getCollections();
+    }
+
+    public void follow(Long id, SimpleUser follow){
+        SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
+        Set<SimpleUser> follows = simpleUser.getFollows();
+        if(follows.contains(follow)){
+            follows.remove(follow);
+        }
+        else follows.add(follow);
+    }
+
+    public Set<SimpleUser> queryFollows(Long id){
+        SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
+        return simpleUser.getFollows();
+    }
+
+    public void changeSetting(Long id, boolean personal, boolean article, boolean collection, boolean follow){
+        SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
+        UserSetting setting = simpleUser.getUserSetting();
+        setting.setOpenPersonal(personal);
+        setting.setOpenArticle(article);
+        setting.setOpenCollection(collection);
+        setting.setOpenFollow(follow);
+    }
+
+    public boolean setContainArticle(Set<Article> set, Article article) {
+        for(Article a:set){
+            if(a.getId().equals(article.getId())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void removeArticleFromSet(Set<Article> set, Article article){
+        for(Article a:set){
+            if(a.getId().equals(article.getId())){
+                set.remove(a);
+            }
+        }
     }
 }

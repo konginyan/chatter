@@ -1,11 +1,10 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class SimpleUser implements Serializable{
@@ -21,6 +20,20 @@ public class SimpleUser implements Serializable{
     String password;
     Date createDate;
     int status;
+    int followerCount;
+
+    @Embedded
+    UserSetting userSetting;
+
+    @SuppressWarnings("JpaDataSourceORMInspection")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name="user_follow",joinColumns={@JoinColumn(name="u_id")},inverseJoinColumns={@JoinColumn(name="f_id")})
+    Set<SimpleUser> follows;
+
+    @SuppressWarnings("JpaDataSourceORMInspection")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name="user_collection",joinColumns={@JoinColumn(name="u_id")},inverseJoinColumns={@JoinColumn(name="c_id")})
+    Set<Article> collections;
 
     public SimpleUser(){
 
@@ -31,6 +44,9 @@ public class SimpleUser implements Serializable{
         this.password = password;
         this.createDate = createDate;
         this.status = NORMAL;
+        this.follows = new HashSet<SimpleUser>();
+        this.collections = new HashSet<Article>();
+        this.userSetting = new UserSetting(true,true,true,true);
     }
 
     public Long getId() {
@@ -71,5 +87,37 @@ public class SimpleUser implements Serializable{
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Set<SimpleUser> getFollows() {
+        return follows;
+    }
+
+    public void setFollows(Set<SimpleUser> follows) {
+        this.follows = follows;
+    }
+
+    public Set<Article> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(Set<Article> collections) {
+        this.collections = collections;
+    }
+
+    public UserSetting getUserSetting() {
+        return userSetting;
+    }
+
+    public void setUserSetting(UserSetting userSetting) {
+        this.userSetting = userSetting;
+    }
+
+    public int getFollowerCount() {
+        return followerCount;
+    }
+
+    public void setFollowerCount(int followerCount) {
+        this.followerCount = followerCount;
     }
 }
