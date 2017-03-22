@@ -7,6 +7,7 @@
     <package name="simple" namespace="/" extends="struts-default" strict-method-invocation="false">
         <interceptors>
             <interceptor name="hasLogin" class="simple.interceptor.hasLoginInterceptor"/>
+            <interceptor name="notLogin" class="simple.interceptor.notLoginInterceptor"/>
             <interceptor-stack name="hasLoginStack">
                 <interceptor-ref name="hasLogin"/>
                 <interceptor-ref name="defaultStack"/>
@@ -28,12 +29,13 @@
 
         <global-results>
             <result name="Index" type="redirect">index</result>
+            <result name="Login" type="redirect">loginPage</result>
             <result name="Exception">/exception.jsp</result>
         </global-results>
 
-        <!--<global-exception-mappings>-->
-            <!--<exception-mapping exception="java.lang.Exception" result="Exception"/>-->
-        <!--</global-exception-mappings>-->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="Exception"/>
+        </global-exception-mappings>
 
         <action name="index" class="simple.action.indexAction">
             <result name="success">/index.jsp</result>
@@ -45,7 +47,7 @@
             <interceptor-ref name="hasLoginStack"/>
         </action>
 
-        <action name="login" class="simple.action.loginAction">
+        <action name="login" class="simple.action.LoginAction">
             <result name="success" type="redirect">${responseUrl}</result>
             <result name="error" type="chain">loginPage</result>
             <result name="invalid.token" type="redirect">index</result>
@@ -68,6 +70,10 @@
         </action>
 
         <action name="um_*" class="simple.action.SimpleDbAction" method="{1}">
+            <interceptor-ref name="notLogin">
+                <param name="excludeMethods">checkSimple</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
         </action>
 
         <action name="mainWindow" class="simple.action.mainWindowAction">
@@ -105,6 +111,8 @@
         </action>
 
         <action name="co_*" class="simple.action.CommentAction" method="{1}Comment">
+            <interceptor-ref name="notLogin"/>
+            <interceptor-ref name="defaultStack"/>
         </action>
     </package>
 </struts>

@@ -60,4 +60,29 @@ public class SimpleDbAction extends ActionSupport{
         simpleService.collectArticle(user.getId(),article);
         ajaxResponse.ajaxResponseText("clear");
     }
+
+    public void follow() throws Exception {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        Long id = Long.parseLong(request.getParameter("id"));
+        SimpleUser follow = simpleService.querySimpleById(id);
+        String name = sessionService.getSessionValue(SimpleUser.NAME_IN_SESSION).toString();
+        SimpleUser user = simpleService.querySimpleByName(name);
+        if(simpleService.setContainSimple(user.getFollows(),follow)){
+            simpleService.decendFollowerCount(follow);
+        }
+        else simpleService.addFollowerCount(follow);
+        simpleService.follow(user.getId(),follow);
+        ajaxResponse.ajaxResponseText("clear");
+    }
+
+    public void changeSetting() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String name = sessionService.getSessionValue(SimpleUser.NAME_IN_SESSION).toString();
+        SimpleUser user = simpleService.querySimpleByName(name);
+        boolean openPersonal = Boolean.parseBoolean(request.getParameter("openPersonal"));
+        boolean openArticle = Boolean.parseBoolean(request.getParameter("openArticle"));
+        boolean openCollection = Boolean.parseBoolean(request.getParameter("openCollection"));
+        boolean openFollow = Boolean.parseBoolean(request.getParameter("openFollow"));
+        simpleService.changeSetting(user.getId(),openPersonal,openArticle,openCollection,openFollow);
+    }
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.Cookie;
 
 @Controller
 @Scope("prototype")
-public class loginAction extends ActionSupport{
+public class LoginAction extends ActionSupport{
     SimpleUser simpleUser;
     String autoLogin;
     String responseUrl;

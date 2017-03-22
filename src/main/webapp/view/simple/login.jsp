@@ -23,7 +23,7 @@
     </div>
 </nav>
 <s:if test="#request.errorMessage!=null">
-    <div class="alert alert-danger text-center" style="width: 50%">
+    <div class="alert alert-danger text-center" style="width: 50%;">
         <a class="close" data-dismiss="alert">&times;</a>
         <strong>登录失败:</strong>${errorMessage}
     </div>

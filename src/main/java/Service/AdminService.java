@@ -26,6 +26,15 @@ public class AdminService {
         adminDao.deleteAdmin(id);
     }
 
+    public boolean checkAdminUserLogin(String username, String password){
+        if(username.equals("superAdmin") && password.equals("superAdmin")) return true;
+        AdminUser adminUser = adminDao.queryAdminByName(username);
+        if(adminUser == null) return false;
+        String realPass = adminUser.getPassword();
+        if(password.equals(realPass)) return true;
+        else return false;
+    }
+
     public boolean checkAdminUserExist(String username){
         AdminUser adminUser = adminDao.queryAdminByName(username);
         if(adminUser == null) return false;

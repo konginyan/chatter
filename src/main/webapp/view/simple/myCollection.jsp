@@ -18,7 +18,9 @@
             </s:else>
             <label style="float: right">
                 点击量:<s:property value="clickCount"/>
-                <a onclick="cancelConfirm('<s:property value="id"/>','<s:property value="title"/>')">取消收藏</a>
+                <s:if test="#session.account==#session.pageMaster">
+                    <a onclick="cancelConfirm('<s:property value="id"/>','<s:property value="title"/>')">取消收藏</a>
+                </s:if>
             </label>
         </div>
         <hr/>

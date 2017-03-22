@@ -1,12 +1,10 @@
 package Dao;
 
-import entity.Article;
 import entity.Comment;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Repository
 public class CommentDao {

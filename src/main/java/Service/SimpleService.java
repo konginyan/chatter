@@ -50,6 +50,10 @@ public class SimpleService {
         return simpleDao.querySimpleByName(name);
     }
 
+    public SimpleUser querySimpleById(Long id){
+        return simpleDao.querySimpleById(id);
+    }
+
     public void forbidSimpleUser(Long id){
         simpleDao.forbidOrReleaseSimpleUser(id);
     }
@@ -80,5 +84,17 @@ public class SimpleService {
 
     public boolean setContainArticle(Set<Article> set, Article article){
         return simpleDao.setContainArticle(set, article);
+    }
+
+    public boolean setContainSimple(Set<SimpleUser> set, SimpleUser simpleUser){
+        return simpleDao.setContainSimple(set,simpleUser);
+    }
+
+    public void addFollowerCount(SimpleUser follow){
+        simpleDao.addFollowerCount(follow);
+    }
+
+    public void decendFollowerCount(SimpleUser follow){
+        simpleDao.decendFollowerCount(follow);
     }
 }

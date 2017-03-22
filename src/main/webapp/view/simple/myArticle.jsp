@@ -18,7 +18,9 @@
         </s:else>
         <label style="float: right">
             点击量:<s:property value="clickCount"/>
-            <a onclick="deleteConfirm('<s:property value="id"/>','<s:property value="title"/>')">删除</a>
+            <s:if test="#session.account==#session.pageMaster">
+                <a onclick="deleteConfirm('<s:property value="id"/>','<s:property value="title"/>')">删除</a>
+            </s:if>
         </label>
     </div>
     <hr/>

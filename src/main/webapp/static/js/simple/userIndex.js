@@ -4,4 +4,11 @@ $(function () {
             'pageMaster':$("#account").text()
         })
     })
+
+    $("#index-search-button").click(()=>{
+        $("#mainWindow").load("li_articleList",{
+            key:$("#index-search-key").val(),
+            page:'0'
+        })
+    })
 })

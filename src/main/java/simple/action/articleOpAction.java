@@ -126,9 +126,11 @@ public class articleOpAction {
         Long id = Long.parseLong(request.getParameter("id"));
         Article article = articleService.queryArticleById(id);
         String path = getRealPath(FileResource.defaultSavePath);
-        File destFile = new File(article.getAttachment().getPath()+"/"+article.getAttachment().getFileName());
-        if (destFile.exists()){
-            destFile.delete();
+        if(article.getAttachment()!=null){
+            File destFile = new File(article.getAttachment().getPath()+"/"+article.getAttachment().getFileName());
+            if (destFile.exists()){
+                destFile.delete();
+            }
         }
         articleService.deleteArticle(id);
         ajaxResponse.ajaxResponseText("success");

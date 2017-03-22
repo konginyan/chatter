@@ -1,18 +1,35 @@
 package Service;
 
 import Dao.ArticleDao;
+import Dao.CommentDao;
+import Dao.SimpleDao;
 import entity.Article;
+import entity.Comment;
+import entity.SimpleUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
 public class ArticleService {
     @Autowired
     ArticleDao articleDao;
+    @Autowired
+    SimpleDao simpleDao;
+    @Autowired
+    CommentDao commentDao;
+
+    public void setCommentDao(CommentDao commentDao) {
+        this.commentDao = commentDao;
+    }
+
+    public void setSimpleDao(SimpleDao simpleDao) {
+        this.simpleDao = simpleDao;
+    }
 
     public void setArticleDao(ArticleDao articleDao) {
         this.articleDao = articleDao;
@@ -23,6 +40,16 @@ public class ArticleService {
     }
 
     public void deleteArticle(Long id){
+        Article article = articleDao.queryArticleById(id);
+        List<Comment> comments = articleDao.queryCommentForArticle(article);
+        for(Comment c:comments){
+            commentDao.deleteComment(c.getId());
+        }
+
+        Set<SimpleUser> collectors = articleDao.querySimpleByArticle(article);
+        for(SimpleUser user:collectors){
+            simpleDao.collectArticle(user.getId(),article);
+        }
         articleDao.deleteArticle(id);
     }
 
@@ -48,6 +75,14 @@ public class ArticleService {
 
     public Article queryArticleById(Long id){
         return articleDao.queryArticleById(id);
+    }
+
+    public List<Article> queryRecentArticlesByAuthor(String name, int number){
+        return articleDao.queryRecentArticlesByAuthor(name, number);
+    }
+
+    public int getTotalNumOfArticles(String name){
+        return articleDao.getTotalNumOfArticles(name);
     }
 
     public void addClickCount(Long id){

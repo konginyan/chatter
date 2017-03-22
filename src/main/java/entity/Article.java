@@ -1,12 +1,11 @@
 package entity;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Article implements Serializable {
@@ -28,6 +27,9 @@ public class Article implements Serializable {
     @OneToMany(mappedBy = "article",fetch = FetchType.EAGER)
     private List<Comment> comments;
 
+    @ManyToMany(cascade = CascadeType.PERSIST,mappedBy = "collections",fetch = FetchType.EAGER)
+    private Set<SimpleUser> collectors;
+
     public Article(){
 
     }
@@ -40,6 +42,7 @@ public class Article implements Serializable {
         this.createTime = createTime;
         this.attachment = attachment;
         this.comments = new ArrayList<Comment>();
+        this.collectors = new HashSet<SimpleUser>();
     }
 
     public Long getId() {
@@ -104,5 +107,13 @@ public class Article implements Serializable {
 
     public void setAttachment(Attachment attachment) {
         this.attachment = attachment;
+    }
+
+    public Set<SimpleUser> getCollectors() {
+        return collectors;
+    }
+
+    public void setCollectors(Set<SimpleUser> collectors) {
+        this.collectors = collectors;
     }
 }

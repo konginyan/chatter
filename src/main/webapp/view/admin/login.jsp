@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,6 +9,12 @@
     <link href="<%=request.getContextPath()%>/static/css/admin/login.css" rel="stylesheet">
 </head>
 <body>
+<s:if test="#request.errorMessage!=null">
+    <div class="alert alert-danger text-center" style="width: 50%;position: absolute;left: 25%;top: 50px">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <strong>登录失败:</strong>${errorMessage}
+    </div>
+</s:if>
 <div id="loginForm">
     <h2 class="text-center">管理员登录</h2>
     <form class="form-horizontal" method="post" action="login">

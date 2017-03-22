@@ -39,7 +39,7 @@
             <result name="success">/view/admin/login.jsp</result>
         </action>
 
-        <action name="login" class="admin.action.loginAction">
+        <action name="login" class="admin.action.AdminLoginAction">
             <interceptor-ref name="defaultStack"/>
             <result type="redirect">main</result>
             <result name="error" type="chain">loginPage</result>

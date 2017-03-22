@@ -8,7 +8,6 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -43,6 +42,10 @@ public class SimpleDao {
         else return null;
     }
 
+    public SimpleUser querySimpleById(Long id){
+        return hibernateTemplate.get(SimpleUser.class,id);
+    }
+
     public void forbidOrReleaseSimpleUser(Long id){
         SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
         if(simpleUser.getStatus()==SimpleUser.NORMAL) simpleUser.setStatus(SimpleUser.FORBID);
@@ -72,10 +75,12 @@ public class SimpleDao {
     public void follow(Long id, SimpleUser follow){
         SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
         Set<SimpleUser> follows = simpleUser.getFollows();
-        if(follows.contains(follow)){
-            follows.remove(follow);
+        if(setContainSimple(follows,follow)){
+            removeSimpleFromSet(follows,follow);
         }
-        else follows.add(follow);
+        else {
+            follows.add(follow);
+        }
     }
 
     public Set<SimpleUser> queryFollows(Long id){
@@ -90,11 +95,21 @@ public class SimpleDao {
         setting.setOpenArticle(article);
         setting.setOpenCollection(collection);
         setting.setOpenFollow(follow);
+        hibernateTemplate.update(simpleUser);
     }
 
     public boolean setContainArticle(Set<Article> set, Article article) {
         for(Article a:set){
             if(a.getId().equals(article.getId())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean setContainSimple(Set<SimpleUser> set, SimpleUser simpleUser) {
+        for(SimpleUser a:set){
+            if(a.getId().equals(simpleUser.getId())){
                 return true;
             }
         }
@@ -107,5 +122,23 @@ public class SimpleDao {
                 set.remove(a);
             }
         }
+    }
+
+    private void removeSimpleFromSet(Set<SimpleUser> set, SimpleUser simpleUser){
+        for(SimpleUser a:set){
+            if(a.getId().equals(simpleUser.getId())){
+                set.remove(a);
+            }
+        }
+    }
+
+    public void addFollowerCount(SimpleUser follow){
+        follow.setFollowerCount(follow.getFollowerCount()+1);
+        hibernateTemplate.update(follow);
+    }
+
+    public void decendFollowerCount(SimpleUser follow){
+        follow.setFollowerCount(follow.getFollowerCount()-1);
+        hibernateTemplate.update(follow);
     }
 }
