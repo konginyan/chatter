@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 public class logoutAction extends ActionSupport{
+    String responseUrl;
     @Autowired
     CookieService cookieService;
     @Autowired
@@ -21,6 +22,15 @@ public class logoutAction extends ActionSupport{
 
     public void setSessionService(SessionService sessionService) {
         this.sessionService = sessionService;
+    }
+
+    public String getResponseUrl() {
+        if(responseUrl!=null) return responseUrl;
+        else return "index";
+    }
+
+    public void setResponseUrl(String responseUrl) {
+        this.responseUrl = responseUrl;
     }
 
     @Override

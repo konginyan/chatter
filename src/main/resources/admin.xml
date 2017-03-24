@@ -83,7 +83,7 @@
             <interceptor-ref name="defaultStack">
                 <!--单位为byte-->
                 <param name="fileUpload.maximumSize">1024000000</param>
-                <param name="fileUpload.allowedExtensions">txt,zip,7z,doc,docx,ppt,pptx</param>
+                <param name="fileUpload.allowedExtensions">zip,7z,rar,exe</param>
             </interceptor-ref>
         </action>
 

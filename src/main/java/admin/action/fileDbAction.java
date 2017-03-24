@@ -110,10 +110,13 @@ public class fileDbAction {
         File destFile = new File(path+'/'+fileResource.getFileName());
         if (destFile.exists()){
             destFile.delete();
-            ajaxResponse.ajaxResponseText("success");
             fileService.deleteFile(id);
+            ajaxResponse.ajaxResponseText("success");
         }
-        else ajaxResponse.ajaxResponseText("the file isn't exist");
+        else {
+            fileService.deleteFile(id);
+            ajaxResponse.ajaxResponseText("the file isn't exist");
+        }
         return null;
     }
 

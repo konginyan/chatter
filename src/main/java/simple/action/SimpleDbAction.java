@@ -85,4 +85,16 @@ public class SimpleDbAction extends ActionSupport{
         boolean openFollow = Boolean.parseBoolean(request.getParameter("openFollow"));
         simpleService.changeSetting(user.getId(),openPersonal,openArticle,openCollection,openFollow);
     }
+
+    public String changePassword() throws Exception{
+        HttpServletRequest request = ServletActionContext.getRequest();
+        Long id = Long.parseLong(request.getParameter("id"));
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        if(simpleService.updateSimpleByPassword(id,oldPassword,newPassword)){
+            ajaxResponseText("修改成功");
+        }
+        else ajaxResponseText("原密码错误");
+        return null;
+    }
 }

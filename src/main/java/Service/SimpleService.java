@@ -97,4 +97,8 @@ public class SimpleService {
     public void decendFollowerCount(SimpleUser follow){
         simpleDao.decendFollowerCount(follow);
     }
+
+    public boolean updateSimpleByPassword(Long id, String oldPassword, String newPassword){
+        return simpleDao.updateSimpleByPassword(id, oldPassword, newPassword);
+    }
 }

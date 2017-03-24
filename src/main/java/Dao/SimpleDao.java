@@ -141,4 +141,16 @@ public class SimpleDao {
         follow.setFollowerCount(follow.getFollowerCount()-1);
         hibernateTemplate.update(follow);
     }
+
+    public boolean updateSimpleByPassword(Long id, String oldPassword, String newPassword){
+        SimpleUser simpleUser = hibernateTemplate.get(SimpleUser.class,id);
+        if(simpleUser != null){
+            if(simpleUser.getPassword().equals(oldPassword)){
+                simpleUser.setPassword(newPassword);
+                hibernateTemplate.update(simpleUser);
+                return true;
+            }
+        }
+        return false;
+    }
 }

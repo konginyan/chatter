@@ -11,7 +11,7 @@
         <textarea class="form-control" rows="10" id="articleContent" name="articleContent"></textarea>
     </div>
     <div class="form-group">
-        <label for="articleFile">附件</label>
+        <label for="articleFile">附件(允许文件类型：zip, 7z, rar, exe  文件最大限制：1000 MB)</label>
         <input type="file" id="articleFile" name="file">
     </div>
     <button id="postNotice" type="submit" class="btn btn-default">提交</button>

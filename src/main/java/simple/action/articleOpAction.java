@@ -125,7 +125,6 @@ public class articleOpAction {
         HttpServletRequest request = ServletActionContext.getRequest();
         Long id = Long.parseLong(request.getParameter("id"));
         Article article = articleService.queryArticleById(id);
-        String path = getRealPath(FileResource.defaultSavePath);
         if(article.getAttachment()!=null){
             File destFile = new File(article.getAttachment().getPath()+"/"+article.getAttachment().getFileName());
             if (destFile.exists()){

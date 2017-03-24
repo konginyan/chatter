@@ -17,6 +17,9 @@
                 </s:else>
             </s:if>
         </s:if>
+        <s:else>
+            <button style="margin-left: 30px" class="btn btn-default" data-toggle="modal" data-target="#passModal">修改密码</button>
+        </s:else>
     </h3>
 
     <ul class="nav nav-tabs">
@@ -90,6 +93,36 @@
                 <div id="mySetting"></div>
             </div>
         </s:if>
+    </div>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="passModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <label id="userId"><s:property value="#request.author.id"/></label>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label id="id-label" hidden></label>
+                    <div id="nameForm" class="form-group">
+                        <label for="oldPassword">原密码</label>
+                        <input type="password" class="form-control" id="oldPassword">
+                    </div>
+                    <div id="passwordForm" class="form-group">
+                        <label for="newPassword">新密码</label>
+                        <input type="password" class="form-control" id="newPassword">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="updatePass" type="button" class="btn btn-primary">修改</button>
+            </div>
+        </div>
     </div>
 </div>
 </html>

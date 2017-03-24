@@ -22,7 +22,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">上传文件</h4>
+                            <h4 class="modal-title" id="myModalLabel">上传文件(允许文件类型：zip, 7z, rar, exe  文件最大限制：1000 MB)</h4>
                         </div>
                         <div class="modal-body">
                             <form id="fileForm" method="post" action="fm_uploadFile" enctype="multipart/form-data">

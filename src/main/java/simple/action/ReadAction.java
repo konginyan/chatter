@@ -20,6 +20,7 @@ import java.util.List;
 @Scope("prototype")
 public class ReadAction extends ActionSupport{
     String id;
+    String SimpleUsername;
     @Autowired
     NoticeService noticeService;
     @Autowired
@@ -53,10 +54,20 @@ public class ReadAction extends ActionSupport{
         this.id = id;
     }
 
+    public String getSimpleUsername() {
+        return SimpleUsername;
+    }
+
+    public void setSimpleUsername(String simpleUsername) {
+        SimpleUsername = simpleUsername;
+    }
+
     public String Notice() throws Exception {
+        checkCookie();
         NoticeResource noticeResource = noticeService.getNoticeById(Long.parseLong(id));
         noticeService.addClickCount(Long.parseLong(id));
         ActionContext actionContext = ActionContext.getContext();
+        actionContext.put("id",noticeResource.getId());
         actionContext.put("title",noticeResource.getTitle());
         actionContext.put("time",noticeResource.getCreateTime());
         actionContext.put("content",noticeResource.getNotice());
@@ -64,6 +75,7 @@ public class ReadAction extends ActionSupport{
     }
 
     public String Article() throws Exception {
+        checkCookie();
         Article article = articleService.queryArticleById(Long.parseLong(id));
         articleService.addClickCount(Long.parseLong(id));
         List<Comment> comments = article.getComments();
@@ -77,5 +89,13 @@ public class ReadAction extends ActionSupport{
             else actionContext.put("collected",false);
         }
         return "Article";
+    }
+
+    private void checkCookie(){
+        if(SimpleUsername != null){
+            if(simpleService.checkSimpleUserExist(SimpleUsername)){
+                sessionService.setSession("account",SimpleUsername);
+            }
+        }
     }
 }

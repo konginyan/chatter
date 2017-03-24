@@ -2,11 +2,11 @@ $(function () {
     $("#myPersonal").load("myPersonal");
     $("#myCollection").load("myCollection");
     $("#myFollow").load("myFollow");
-    $("#mySetting").load("mySetting")
+    $("#mySetting").load("mySetting");
 
     $("#post").click(()=>{
         $("#article").load("myArticleEdit");
-    })
+    });
 
     $("#followUser").click(()=>{
         $.ajax({
@@ -21,7 +21,30 @@ $(function () {
                 })
             }
         })
-    })
+    });
+
+    $("#passModal").click(()=>{
+        $("#oldPassword").val("");
+        $("#newPassword").val("");
+    });
+
+    $("#updatePass").click(()=>{
+        if(confirm("确定修改密码吗")){
+            $.ajax({
+                url:'um_changePassword',
+                type:'POST',
+                data:{
+                    'id':$("#userId").text(),
+                    'oldPassword':$("#oldPassword").val(),
+                    'newPassword':$("#newPassword").val()
+                },
+                success:function (data,textStatus) {
+                    $("#cancel").click();
+                    alert(data)
+                }
+            })
+        }
+    });
 
     $("#article-search-btn").click(()=>{
         $("#myArticle").load("myArticle",{
